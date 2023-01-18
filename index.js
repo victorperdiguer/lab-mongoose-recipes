@@ -18,7 +18,16 @@ mongoose
     return Recipe.deleteMany()
   })
   .then(() => {
-    Recipe.create({ title: 'Space Brownie', level: 'Easy Peasy', ingredients: ['chocolate', 'flour', 'weed', 'more weed', 'sugar'], cuisine: 'Home kitchen', dishType: 'dessert', duration: 30, creator: 'My pothead friend "El Rata"' });
+    return Recipe.create({ title: 'Space Brownie', level: 'Easy Peasy', ingredients: ['chocolate', 'flour', 'weed', 'more weed', 'sugar'], cuisine: 'Home kitchen', dishType: 'dessert', duration: 30, creator: 'My pothead friend "El Rata"' });
+  })
+  .then(() => {
+    return Recipe.insertMany(data);
+  })
+  .then(() => {
+    Recipe.find({}, 'title').exec()
+      .then(docs => console.log(docs))
+  })
+  .then(() => {
   })
   .catch(error => {
     console.error('Error connecting to the database', error);
