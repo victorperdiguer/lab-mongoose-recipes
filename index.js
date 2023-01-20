@@ -25,9 +25,16 @@ mongoose
   })
   .then(() => {
     Recipe.find({}, 'title').exec()
-      .then(docs => console.log(docs))
+      .then(docs => console.log(docs));
   })
   .then(() => {
+    return Recipe.findOneAndUpdate({title: 'Rigatoni alla Genovese'}, {duration: 100});
+  })
+  .then(() => {
+    return Recipe.deleteOne({title: 'Carrot Cake'});
+  })
+  .then(() => {
+    mongoose.connection.close();
   })
   .catch(error => {
     console.error('Error connecting to the database', error);
